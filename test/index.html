@@ -1,0 +1,33 @@
+<script type="module">
+    console.log("ts-loading");
+    import {initTypescript} from "../dist/index.js";
+    console.log("ts-loaded");
+    import {fs, path, process, require} from "../node_modules/petit-fs/dist/index.js";
+    window.fs=fs;
+    fs.mountSync("/tmp/","ram");
+    const ts=initTypescript({fs, path, process, require});
+    console.log("ts-inited",ts);
+    window.ts=ts;
+    import {compileProject, compileFile} from "./compileProject.js";
+    fs.writeFileSync("test.ts",`
+const hoge = 'hoge' as any
+const bar = 'bar'
+const piyo = <any>'piyo'
+
+function foo():number {
+  return 'foo'
+}`);
+compileFile({ts,fs,path}, "test.ts", "/tmp/out/");
+console.log(fs.readFileSync("tmp/out/test.js","utf-8"));
+fs.writeFileSync("test.ts",`
+const hoge = 'hoge' as any
+const bar = 'bar'
+const piyo = <any>'piyo'
+
+function foo():string {
+  return 'foo'
+}`);
+compileFile({ts,fs,path}, "test.ts", "/tmp/out/");
+console.log(fs.readFileSync("tmp/out/test.js","utf-8"));
+
+</script>

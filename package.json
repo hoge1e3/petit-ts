@@ -1,0 +1,21 @@
+{
+  "name": "petit-ts",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "build": "node build/ts-files.js",
+    "test": "npx http-server -o test/index.html"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "typescript compiler in browser",
+  "devDependencies": {
+    "petit-fs": "^1.0.8",
+    "typescript": "5.7.2"
+  }
+}

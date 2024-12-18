@@ -1,0 +1,52 @@
+<script type="module">
+    import {initTypescript} from "../dist/index.js";
+
+    import {fs, path, process, require} from "../node_modules/petit-fs/dist/index.js";
+    window.fs=fs;
+    fs.mountSync("/tmp/","ram");
+    const ts=initTypescript({fs, path, process, require});
+    window.ts=ts;
+
+    fs.writeFileSync("test.ts",`
+const hoge = 'hoge' as any
+const bar = 'bar'
+const piyo = <any>'piyo'
+
+function foo() {
+  return 'foo' as unknown
+}`);
+
+// from https://qiita.com/suke083/items/878e9d275305ae18c30b
+function visitAll(node, callback) {
+  callback(node)
+  node.forEachChild(child => visitAll(child, callback))
+}
+
+function isTypeAssertion(node) {
+  return ts.isTypeAssertionExpression(node) || ts.isAsExpression(node)
+}
+
+function printTypeAssertionLog(sourceFile, node, filename) {
+  const { line, character } = sourceFile.getLineAndCharacterOfPosition(node.getStart(sourceFile))
+  console.log(`Type Assertion detected in file ${filename} at line ${line + 1}, column ${character + 1}`)
+}
+
+function detectTypeAssertions(filepath) {
+  const program = ts.createProgram([filepath], {})
+  const sourceFile = program.getSourceFile(filepath);
+  console.log(sourceFile);
+  if (!sourceFile) {
+    console.error("Source file not found.")
+    process.exit(1)
+  }
+
+  visitAll(sourceFile, node => {
+    //console.log("visit", node);
+    if(isTypeAssertion(node)) {
+      printTypeAssertionLog(sourceFile, node, filepath)
+    }
+  })
+}
+detectTypeAssertions("test.ts");
+
+</script>
