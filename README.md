@@ -7,7 +7,7 @@ typescript compiler in browser using filesystem on localStorage
   - petit-fs stores files in localStorage but can also mount ram storage.
 - The typescript library files(in `node_modules/typescript/lib/`) will be expanded to `/tmp/ts` in local virtual  filesystem. 
   - It exceeds 5MB, the quota limit of localStorage. Then you have to mount ram disk on `/tmp/` it 
-
+- [Example in codePen](https://codepen.io/hoge1e3/pen/KwPWpMV)
 ~~~js
 import {initTypescript} from "https://unpkg.com/petit-ts/dist/index.js";
 import {fs, path, process, require} from "https://unpkg.com/petit-fs/dist/index.js";
