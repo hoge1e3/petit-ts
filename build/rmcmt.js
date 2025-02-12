@@ -2,6 +2,7 @@
 
 import { getNodeFS, SFile } from "@hoge1e3/sfile";
 import ug from "uglify-js";
+import {zip} from "@hoge1e3/fs2";
 
 export async function main(){
     const FS=await getNodeFS();
@@ -32,6 +33,7 @@ export async function main(){
         let str=read(f);
         dst.rel(f.relPath(src)).text(str);
     }
+    await zip.zip(dst, dst.sibling("node_modules.zip") );
 }
 function read(f) {
     let str=f.text();
