@@ -7,7 +7,7 @@
   },
   "scripts": {
     "build": "node build/ts-files.js",
-    "test": "npx http-server -o test/index.html"
+    "test": "npx http-server -o test/tsc.html"
   },
   "type": "module",
   "keywords": [],

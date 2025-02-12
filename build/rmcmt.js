@@ -6,11 +6,18 @@ import ug from "uglify-js";
 export async function main(){
     const FS=await getNodeFS();
     const home=FS.get("./");
-    const types=["@types/node","undici-types"];
+    const types=[
+        "@types/node","undici-types",
+        "petit-node","@hoge1e3/fs",
+        "@hoge1e3/fs2", "@hoge1e3/sfile",
+        "jszip","@types/espree","@types/file-saver"
+    ];
     const src=home.rel("node_modules");
     const dst=home.rel("dist/node_modules");
+    dst.rm({r:true});
     for (let type of types) {
         for(let f of src.rel(type).recursive()){
+            if (f.endsWith(".js")) continue;
             console.log(f.path());
             let str=read(f);
             dst.rel(f.relPath(src)).text(str);
