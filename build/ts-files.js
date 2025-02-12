@@ -3,14 +3,6 @@ import ts from "typescript";
 //import path from "path";
 const tsHome="node_modules/typescript/lib";
 
-function conv(tscont, fn,dir) {
-    return `/*process,require*/        
-const __filename=${JSON.stringify(fn)};
-const __dirname=${JSON.stringify(dir)};
-${tscont}
-return ts;
-`;
-}
 const dst="/tmp/ts/";
 const data={};
 let tscont, tsfn;
@@ -25,7 +17,6 @@ for (let file of fs.readdirSync(tsHome)) {
         tscont=cont;
         tsfn=dstf;
         continue;
-        //cont=conv(cont, dstf,tsHome);
     }
     data[file]=cont+"\n//# sourceURL=file://"+dstf;
 }

@@ -15,7 +15,12 @@
   "license": "ISC",
   "description": "typescript compiler in browser",
   "devDependencies": {
+    "@hoge1e3/sfile": "^1.1.4",
+    "@types/node": "^22.13.1",
+    "@types/uglify-js": "^3.17.5",
     "petit-fs": "^1.0.8",
-    "typescript": "5.7.2"
+    "petit-node": "^1.1.8",
+    "typescript": "5.7.2",
+    "uglify-js": "^3.19.3"
   }
 }
