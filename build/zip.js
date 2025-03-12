@@ -1,5 +1,5 @@
 import { SFile, Content } from "@hoge1e3/sfile";
-import { saveAs } from "file-saver";
+//import { saveAs } from "file-saver";
 import JSZip from "jszip";
 export class zip {
     static async zip(dir, a, b) {

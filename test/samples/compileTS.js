@@ -1,12 +1,19 @@
-import ts from "typescript";
+#!run
+import {require} from "petit-node";
 import * as fs from "fs";
 import * as path from "path";
-export function compileProject(prj){
-    return    compileProjectF({ts,fs,path}, prj.path());
+const ts=require("typescript","/tmp/node_modules/");
+export function main(dir=".") {
+    //console.log(ts);
+    return compileProject(this.resolve(dir));
+}
+export function compileProject(prj) {
+    return compileProjectF({ts,fs,path},prj.path());
 }
 function compileProjectF({ts,fs,path}, projectPath/*:string*/) {
   // Read configuration from tsconfig.json
   process.chdir(projectPath);
+  console.log("cwd", process.cwd());
   const configPath = ts.findConfigFile(projectPath, ts.sys.fileExists, 'tsconfig.json');
   if (!configPath) {
     throw new Error('Could not find tsconfig.json');

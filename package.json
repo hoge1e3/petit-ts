@@ -1,12 +1,12 @@
 {
   "name": "petit-ts",
-  "version": "1.0.1",
+  "version": "1.0.4",
   "main": "dist/index.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "build": "node build/ts-files.js",
+    "build": "node build/rmcmt.js",
     "test": "npx http-server -o test/tsc.html"
   },
   "type": "module",
@@ -16,11 +16,14 @@
   "description": "typescript compiler in browser",
   "devDependencies": {
     "@hoge1e3/sfile": "^1.1.4",
+    "@types/espree": "^10.1.0",
     "@types/node": "^22.13.1",
     "@types/uglify-js": "^3.17.5",
+    "jszip": "^3.10.1",
     "petit-fs": "^1.0.8",
-    "petit-node": "^1.1.8",
+    "petit-node": "^1.1.9",
     "typescript": "5.7.2",
     "uglify-js": "^3.19.3"
-  }
+  },
+  "files": ["dist/node_modules.zip"]
 }
